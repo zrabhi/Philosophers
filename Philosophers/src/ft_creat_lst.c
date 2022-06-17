@@ -1,20 +1,54 @@
-// t_stack	*ft_create_a(int nbr, t_stack *stack_a)
-// {
-// 	t_stack	*new;
-// 	t_stack	*tmp;
+#include "philosophers.h"
 
-// 	tmp = stack_a;
-// 	while (stack_a != NULL && stack_a->next != NULL)
-// 		stack_a = stack_a->next;
-// 	new = malloc(sizeof(t_stack));
-// 	if (!new)
-// 		return (0);
-// 	new->data= nbr;
-// 	new->index = -1;
-// 	new->next = NULL;
-// 	if (tmp == NULL)
-// 		tmp = new;
-// 	else
-// 		stack_a->next = new;
-// 	return (tmp);
-// }
+t_list *ft_newnode(int id)
+{
+    t_list *lst;
+
+    lst = malloc(sizeof(t_list));
+    if(!lst)
+        return(NULL);
+    lst->id   = id;
+    lst->index = 0;
+    lst->is_dead  = 0;
+    lst->left_fork = 0;
+    lst->right_fork = 0;
+    lst->next = NULL;
+    lst->previous = NULL;
+    return(lst);
+}
+
+void ft_get_lst(int philo_number, t_data *data)
+{
+    t_list *lst;
+    int i;
+    
+    i = -1;
+    while(++i < philo_number)
+        ft_crearlst(&data, ft_newnode(i));
+}
+
+
+void    ft_crearlst(t_data **data, t_list *lst)
+{
+    t_list *tmp;
+
+    if((*data))
+    {
+        if ((*data)->head)
+        {
+            (*data)->head = lst;
+            (*data)->tail = lst;
+            (*data)->head->next = NULL;
+            (*data)->head->previous = (*data)->tail;
+        }
+        else
+        {
+            tmp = (*data)->head;
+            (*data)->head = lst;
+            (*data)->head->previous = (*data)->tail;
+            lst->next = tmp;
+            tmp->previous = (*data)->head;
+            (*data)->tail->next = NULL;
+        }
+    }
+}

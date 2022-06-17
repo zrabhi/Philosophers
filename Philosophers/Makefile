@@ -8,7 +8,7 @@ BLUE  := \033[0;34m
 philo    = philosophers
 draw     =  draw
 SRC_DIR  = src
-SRC		 = $(SRC_DIR)/ft_atoi.c $(SRC_DIR)/ft_philo_utilis.c
+SRC		 = $(SRC_DIR)/ft_atoi.c $(SRC_DIR)/ft_philo_utilis.c $(SRC_DIR)/ft_isdigit.c $(SRC_DIR)/ft_creat_lst.c
 main	 = $(SRC_DIR)/main.c
 OBJ		 = $(SRC:.c=.o)
 CC		 = gcc
@@ -19,7 +19,7 @@ PH := "\n$(GREEN)  _____  _     _ _____         _____  _______  _____   _____  _
 
 all : $(NAME)
 	@cat $(draw)/ascii-art.ans
-	@echo $(PH)
+	@cat $(draw)/philosophers-art.ans
 $(NAME) : $(OBJ) $(main) $(HEADER)
 	@$(CC) $(GCC_FLAGS) $(main) $(OBJ) -o $(NAME)
 	@echo""

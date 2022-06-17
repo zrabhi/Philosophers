@@ -3,13 +3,6 @@
 long long ft_get_time(void)
 {
     struct timeval time;
-    // long long   current
-    // while(++i < 10)
-    // {
-    //     current = gettimeofday(&time, NULL);
-    //     printf("%lld\n", time.tv_sec + 1/ 1000LL);
-    //     sleep(1);
-    // }
     gettimeofday(&time, NULL);
     return((time.tv_sec + 1) / 1000LL);
 }
