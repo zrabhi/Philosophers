@@ -1,54 +1,54 @@
 #include "philosophers.h"
 
-t_list *ft_newnode(int id)
+t_data *ft_newnode(int id)
 {
-    t_list *lst;
+    t_data *philo_data;
 
-    lst = malloc(sizeof(t_list));
-    if(!lst)
+    philo_data = malloc(sizeof(t_data));
+    if(!philo_data)
         return(NULL);
-    lst->id   = id;
-    lst->index = 0;
-    lst->is_dead  = 0;
-    lst->left_fork = 0;
-    lst->right_fork = 0;
-    lst->next = NULL;
-    lst->previous = NULL;
-    return(lst);
+    philo_data->next = NULL;
+    philo_data->previous = NULL;
+    philo_data->id   = id;
+    philo_data->index = 0;
+    philo_data->is_dead  = 0;
+    philo_data->left_fork = 0;
+    philo_data->right_fork = 0;
+    return(philo_data);
 }
 
-void ft_get_lst(int philo_number, t_data *data)
+t_table *ft_creatphilo_data(t_table **table, t_data *data)
 {
-    t_list *lst;
-    int i;
-    
-    i = -1;
-    while(++i < philo_number)
-        ft_crearlst(&data, ft_newnode(i));
-}
+    t_data *tmp;
 
-
-void    ft_crearlst(t_data **data, t_list *lst)
-{
-    t_list *tmp;
-
-    if((*data))
+    tmp = NULL;
+    if(!data)
+        return(NULL);
+    if(!(*table)->head)
     {
-        if ((*data)->head)
-        {
-            (*data)->head = lst;
-            (*data)->tail = lst;
-            (*data)->head->next = NULL;
-            (*data)->head->previous = (*data)->tail;
-        }
-        else
-        {
-            tmp = (*data)->head;
-            (*data)->head = lst;
-            (*data)->head->previous = (*data)->tail;
-            lst->next = tmp;
-            tmp->previous = (*data)->head;
-            (*data)->tail->next = NULL;
-        }
+        (*table)->head = data;
+        (*table)->head->next = NULL;
+        (*table)->head->previous = (*table)->head;
+        (*table)->head->table = (*table);
     }
+    else
+    {
+        tmp = (*table)->head->previous;
+        (*table)->head->previous = data;
+        data->next = (*table)->head;
+        data->previous = tmp;
+        tmp->next = data;
+        data->table = (*table);
+    }
+    return(*table);
+}
+
+
+void    ft_get_philo_data(t_table *table)
+{
+    int i;
+
+    i = -1;
+    while(++i < table->number_of_philosophers)
+           table = ft_creatphilo_data(&table, ft_newnode(i + 1));
 }

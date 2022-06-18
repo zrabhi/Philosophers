@@ -8,11 +8,12 @@ BLUE  := \033[0;34m
 philo    = philosophers
 draw     =  draw
 SRC_DIR  = src
-SRC		 = $(SRC_DIR)/ft_atoi.c $(SRC_DIR)/ft_philo_utilis.c $(SRC_DIR)/ft_isdigit.c $(SRC_DIR)/ft_creat_lst.c
+PARSING_DIR = $(SRC_DIR)/parsing
+SRC		 = $(SRC_DIR)/ft_atoi.c $(PARSING_DIR)/ft_philo_utilis.c $(PARSING_DIR)/ft_isdigit.c $(PARSING_DIR)/ft_colors.c $(PARSING_DIR)/ft_check_input.c $(SRC_DIR)/ft_creat_lst.c $(SRC_DIR)/ft_create.c
 main	 = $(SRC_DIR)/main.c
 OBJ		 = $(SRC:.c=.o)
 CC		 = gcc
-GCCFLAGS = -Wall -Wextra -Werror
+GCCFLAGS = -Wall -Wextra -Werror -lpthread
 HEADER   = $(SRC_DIR)/philosophers.h
 NAME     = philosophers
 PH := "\n$(GREEN)  _____  _     _ _____         _____  _______  _____   _____  _     _ _______  ______ _______\n |_____] |_____|   |   |      |     | |______ |     | |_____] |_____| |______ |_____/ |______\n |       |     | __|__ |_____ |_____| ______| |_____| |       |     | |______ |    \_ ______|\n                                                                                             \n$                       \n$(WHITE)\n"
