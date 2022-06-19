@@ -18,7 +18,6 @@ typedef struct s_data{
     int             right_fork;
     int             left_fork;
     pthread_t       thr;
-    pthread_mutex_t fork;
     struct  s_data *next;
     struct  s_data *previous;
     struct s_table        *table;
@@ -46,8 +45,8 @@ bool        ft_isdigit(char *str);
 bool        ft_check(char **av, int ac);
 bool        ft_create_threads(t_table *table);
 bool        ft_join_threads(t_table *table);
-bool        ft_init_mutex(t_table *table);
-bool        ft_mutex_destroy(t_table *table);
+bool        ft_init_mutex(pthread_mutex_t *fork, t_table *table);
+bool        ft_mutex_destroy(pthread_mutex_t *fork, t_table *table);
 #endif
 
 
