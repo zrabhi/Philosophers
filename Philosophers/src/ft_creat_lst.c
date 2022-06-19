@@ -12,8 +12,7 @@ t_data *ft_newnode(int id)
     philo_data->id   = id;
     philo_data->index = 0;
     philo_data->is_dead  = 0;
-    philo_data->left_fork = 0;
-    philo_data->right_fork = 0;
+    philo_data->philo_age = ft_get_time();
     return(philo_data);
 }
 
