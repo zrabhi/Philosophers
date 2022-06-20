@@ -15,40 +15,39 @@ typedef struct s_data{
     int             id;
     int             index;
     int             is_dead;
-    long long       philo_age;
+    int             right_fork;
+    int             left_fork;
     pthread_t       thr;
-    struct  s_data  *next;
-    struct  s_data  *previous;
-    struct s_table  *table;
+    pthread_mutex_t fork;
+    struct  s_data *next;
+    struct  s_data *previous;
+    struct s_table        *table;
 } t_data;
 
 typedef struct s_table {
-    int             number_of_philosophers;
-    int             time_to_die;
-    int             time_to_eat;
-    int             time_to_sleep;
-    int             number_of_times_each_philosopher_must_eat;
-    pthread_mutex_t *fork;
+    int      number_of_philosophers;
+    int      time_to_die;
+    int      time_to_eat;
+    int      time_to_sleep;
+    int      number_of_times_each_philosopher_must_eat;
     struct s_data   *head;
 }   t_table;
 
-pthread_mutex_t	*init_mutexes(t_table **table);
-long long   ft_get_time();
+long long   ft_get_time(void);
 t_table     *ft_creatphilo_data(t_table **table, t_data *data);
 t_data      *ft_newnode(int id);
 int         ft_atoi(const char *str);
 void        ft_get_philo_data( t_table *table);
 void        red();
 void        philo_routine();
-void        ft_philosopher_routine(void *param);
 bool        ft_create_threads(t_table *table);
 bool        ft_init(int ac , char **av, t_table *table);
 bool        ft_isdigit(char *str);
 bool        ft_check(char **av, int ac);
 bool        ft_create_threads(t_table *table);
 bool        ft_join_threads(t_table *table);
+bool        ft_init_mutex(t_table *table);
 bool        ft_mutex_destroy(t_table *table);
-bool ft_init_mutex(pthread_mutex_t *fork, t_table *table);
 #endif
 
 

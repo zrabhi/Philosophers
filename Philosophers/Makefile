@@ -9,7 +9,7 @@ philo    = philosophers
 draw     =  draw
 SRC_DIR  = src
 PARSING_DIR = $(SRC_DIR)/parsing
-SRC		 = $(SRC_DIR)/ft_atoi.c $(PARSING_DIR)/ft_philo_utilis.c $(PARSING_DIR)/ft_isdigit.c $(PARSING_DIR)/ft_colors.c $(PARSING_DIR)/ft_check_input.c $(SRC_DIR)/ft_creat_lst.c $(SRC_DIR)/ft_create.c $(SRC_DIR)/philo_routine.c
+SRC		 = $(SRC_DIR)/ft_atoi.c $(PARSING_DIR)/ft_philo_utilis.c $(PARSING_DIR)/ft_isdigit.c $(PARSING_DIR)/ft_colors.c $(PARSING_DIR)/ft_check_input.c $(SRC_DIR)/ft_creat_lst.c $(SRC_DIR)/ft_create.c
 main	 = $(SRC_DIR)/main.c
 OBJ		 = $(SRC:.c=.o)
 CC		 = gcc
