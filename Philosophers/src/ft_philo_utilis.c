@@ -1,25 +1,27 @@
 #include "philosophers.h"
 
-long long ft_get_time(void)
+int ft_lstsize(t_data *data)
 {
-    struct timeval time;
-    gettimeofday(&time, NULL);
-    return((time.tv_sec + 1) / 1000LL);
+    int i;
+
+    i = 0;
+    while (i < data->table->number_of_philosophers && data)    
+    {
+        i++;
+        data = data->next;
+    }
+    return (i);
 }
 
-// void    ft_philo_routine(void)
-// {
-//     printf("thread created succesfully , still need to work on philo routine");
 
-// }
+void	ft_usleep(int time)
+{
+    long long start;
 
-// void    ft_creat_threads(t_philo *philo, int number_of_philo)
-// {
-//     int i;
-
-//     i = -1;
-//     while(++i)
-//         pthread_create(philo->thr,)
-
-
-// }
+    start = ft_get_time();
+    usleep((time * 0.9) * 1000);
+    while(ft_get_time() - start < time)
+    {
+        usleep(10);
+    }
+}
