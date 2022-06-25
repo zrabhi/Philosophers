@@ -15,12 +15,15 @@ OBJ		 = $(SRC:.c=.o)
 CC		 = cc
 GCCFLAGS = -Wall -Wextra -Werror -pthread
 HEADER   = $(SRC_DIR)/philosophers.h
-NAME     = philosophers
+NAME     = philo
 PH := "\n$(GREEN)  _____  _     _ _____         _____  _______  _____   _____  _     _ _______  ______ _______\n |_____] |_____|   |   |      |     | |______ |     | |_____] |_____| |______ |_____/ |______\n |       |     | __|__ |_____ |_____| ______| |_____| |       |     | |______ |    \_ ______|\n                                                                                             \n$                       \n$(WHITE)\n"
 
 all : $(NAME)
+	@echo""
 	@cat $(draw)/ascii-art.ans
 	@cat $(draw)/philosophers-art.ans
+	@echo""
+
 $(NAME) : $(OBJ) $(main) $(HEADER)
 	@$(CC) $(GCCFLAGS) $(main) $(OBJ) -o $(NAME)
 	@echo""

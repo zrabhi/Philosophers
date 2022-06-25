@@ -9,8 +9,7 @@ bool    ft_create_threads(t_table *table)
     head = table->head;
     while(++i < table->number_of_philosophers)
     {
-
-       if (pthread_create(&(head->thr), NULL, ft_philosopher_routine(head), (void *)head))
+       if (pthread_create(&(head->thr), NULL, ft_philosopher_routine(head), (void *)head) && pthread_detach(head->thr))
                 return(false);
         head = head->next;   
     }
@@ -33,17 +32,18 @@ bool ft_join_threads(t_table *table)
     return(false);
 }
 
-pthread_mutex_t *ft_init_mutex(t_table *table)
+pthread_mutex_t *ft_init_mutex(t_table **table)
 {
     int i;
     pthread_mutex_t *fork;
 
-    fork = malloc(sizeof(pthread_mutex_t) * table->number_of_philosophers);
-    i = 0;
-    while(i++ < table->number_of_philosophers)
+    fork = malloc(sizeof(pthread_mutex_t) * (*table)->number_of_philosophers);
+    i = -1;
+    while(++i < (*table)->number_of_philosophers)
     {
-        if(pthread_mutex_init(&(fork[i]), NULL))
+        if (pthread_mutex_init(&(fork[i]), NULL))
             return (NULL);
+        printf("i : %d\n", i);
     }
     return(fork);
 }

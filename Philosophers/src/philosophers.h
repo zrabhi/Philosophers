@@ -13,10 +13,11 @@
 
 typedef struct s_data{
     int             id;
-    int             index;
+    int             t_eat;
     int             is_dead;
     long long       philo_age;
-    pthread_mutex_t data;
+    long long       last_meal;
+    int             fork_num;
     pthread_t       thr;
     struct  s_data  *next;
     struct  s_data  *previous;
@@ -29,10 +30,14 @@ typedef struct s_table {
     int             time_to_eat;
     int             time_to_sleep;
     int             number_of_times_each_philosopher_must_eat;
-    pthread_mutex_t *fork;
+    pthread_mutex_t data;
+    pthread_mutex_t *fork;        
     struct s_data   *head;
 }   t_table;
-void	ft_usleep(int time);
+
+bool        ft_num_of_time_to_eat(t_table *table);
+bool        ft_death(t_data *philo, t_table *table);
+void	    ft_usleep(long long time);
 long long   ft_get_time();
 t_table     *ft_creatphilo_data(t_table **table, t_data *data);
 t_data      *ft_newnode(int id);
@@ -52,7 +57,7 @@ bool        ft_check(char **av, int ac);
 bool        ft_create_threads(t_table *table);
 bool        ft_join_threads(t_table *table);
 bool        ft_mutex_destroy(t_table *table);
-pthread_mutex_t       *ft_init_mutex(t_table *table);
+pthread_mutex_t       *ft_init_mutex(t_table **table);
 int         ft_lstsize(t_data *data);
 #endif
 

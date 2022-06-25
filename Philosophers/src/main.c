@@ -1,24 +1,10 @@
 #include "philosophers.h"
 
-// static void     ft_lstprintf(t_table *table)
-// {
-//     t_data *head;
-//     int     i;
-
-//     head = table->head;
-//     i = -1;    
-//     while(++i < table->number_of_philosophers)
-//     {
-//         printf("philosopher number : %5d\n", head->id);
-//         head = head->next;
-//     }
-//     printf("\n");
-// }
-
-
 int main(int ac, char **av)
 {
     t_table *table;
+    t_data *head;
+    int     i;
 
     table = malloc(sizeof(t_table));
     if(!table)
@@ -28,10 +14,17 @@ int main(int ac, char **av)
     if (!ft_check(av, ac))
         return (0);
     ft_get_philo_data(table);
-    // pthread_mutex_init(&(table->head->data), NULL);
-    table->fork = ft_init_mutex(table);
-    if(!ft_create_threads(table))
-        return (0);
-    if(!ft_join_threads(table))
-        return (0);
+    pthread_mutex_init(&(table->data), NULL);
+    table->fork = ft_init_mutex(&table);
+    head = table->head;
+    i = -1;
+    while(++i < table->number_of_philosophers)
+    {
+        head->last_meal = ft_get_time();
+        pthread_create(&(head->thr), NULL, ft_philosopher_routine, (void *)head);
+        pthread_detach(head->thr);
+        head = head->next;
+    }
+    if(ft_death(table->head, table))
+        return(0);
 }

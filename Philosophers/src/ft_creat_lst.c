@@ -10,7 +10,9 @@ t_data *ft_newnode(int id)
     philo_data->next = NULL;
     philo_data->previous = NULL;
     philo_data->id   = id;
+    philo_data->t_eat = 0;
     philo_data->is_dead  = 0;
+    philo_data->fork_num = 0;
     philo_data->philo_age = ft_get_time();
     return (philo_data);
 }
@@ -25,7 +27,7 @@ t_table *ft_creatphilo_data(t_table **table, t_data *data)
     if(!(*table)->head)
     {
         (*table)->head = data;
-        (*table)->head->next = NULL;
+        (*table)->head->next = (*table)->head;
         (*table)->head->previous = (*table)->head;
         (*table)->head->table = (*table);
     }
