@@ -6,7 +6,7 @@
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:30:35 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:30:36 by zakaria          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:23:39 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data{
     long long       last_meal;
     int             fork_num;
     pthread_t       thr;
+    int             t_eat;
     struct  s_data  *next;
     struct  s_data  *previous;
     struct s_table  *table;
@@ -41,7 +42,6 @@ typedef struct s_table {
     int             time_to_eat;
     int             time_to_sleep;
     int             number_of_times_each_philosopher_must_eat;
-    int             t_eat;
     pthread_mutex_t data;
     pthread_mutex_t *fork;        
     struct s_data   *head;

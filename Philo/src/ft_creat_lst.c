@@ -6,7 +6,7 @@
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:29:50 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:29:51 by zakaria          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:40:47 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_data *ft_newnode(int id)
     philo_data->id   = id;
     philo_data->is_dead  = 0;
     philo_data->fork_num = 0;
+    philo_data->t_eat = 0;
     philo_data->philo_age = ft_get_time();
     return (philo_data);
 }

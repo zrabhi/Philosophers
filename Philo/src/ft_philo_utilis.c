@@ -6,7 +6,7 @@
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:29:30 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:29:31 by zakaria          ###   ########.fr       */
+/*   Updated: 2022/06/25 18:52:36 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ bool ft_num_of_time_to_eat(t_table *table)
 {
     int i;
 
-    i = -1;
-    while (++i < table->number_of_philosophers)
+    i = 0;
+    if(!table->number_of_times_each_philosopher_must_eat)
+        return(false);
+    if(i < table->number_of_philosophers)
     {
-        if (table->t_eat == table->number_of_times_each_philosopher_must_eat)
+        if (table->head->t_eat < table->number_of_times_each_philosopher_must_eat)
             return (false);
     }
     return (true);
