@@ -5,7 +5,7 @@ GREEN := \033[0;32m
 BLUE  := \033[0;34m
 #####################
 
-philo    = philosophers
+philo    = philo
 draw     =  draw
 SRC_DIR  = src
 PARSING_DIR = $(SRC_DIR)/parsing
@@ -23,6 +23,7 @@ all : $(NAME)
 	@cat $(draw)/ascii-art.ans
 	@cat $(draw)/philosophers-art.ans
 	@echo""
+	@echo "                  $(BLUE)By zrabhi$(BLUE)                            "
 
 $(NAME) : $(OBJ) $(main) $(HEADER)
 	@$(CC) $(GCCFLAGS) $(main) $(OBJ) -o $(NAME)

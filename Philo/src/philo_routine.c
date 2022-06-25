@@ -6,7 +6,7 @@
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 13:30:28 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:30:29 by zakaria          ###   ########.fr       */
+/*   Updated: 2022/06/25 14:21:12 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool    ft_death(t_data *philo, t_table *table)
                 return(false);
             }
             philo = philo->next;
-            if (!ft_num_of_time_to_eat(table))
+            if (ft_num_of_time_to_eat(table))
                     return(false);
         }
     }
@@ -52,7 +52,7 @@ void    *ft_philosopher_routine(void *param)
     i = philo->id - 1;
     if(i % 2 == 0)
         usleep(600);
-    while(1)
+    while(true)
     {
         pthread_mutex_lock(&(philo->table->fork[i]));
         ft_has_taken_fork(philo);    
@@ -68,5 +68,5 @@ void    *ft_philosopher_routine(void *param)
         ft_is_sleeping(philo);
         ft_thinking(philo);
     } 
-    return (0);
+    return (false);
 }
