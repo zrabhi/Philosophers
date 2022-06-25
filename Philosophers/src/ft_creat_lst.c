@@ -10,7 +10,6 @@ t_data *ft_newnode(int id)
     philo_data->next = NULL;
     philo_data->previous = NULL;
     philo_data->id   = id;
-    philo_data->t_eat = 0;
     philo_data->is_dead  = 0;
     philo_data->fork_num = 0;
     philo_data->philo_age = ft_get_time();

@@ -1,21 +1,5 @@
 #include "philosophers.h"
 
-bool    ft_create_threads(t_table *table)
-{
-    t_data *head;
-    int i;
-
-    i = -1;
-    head = table->head;
-    while(++i < table->number_of_philosophers)
-    {
-       if (pthread_create(&(head->thr), NULL, ft_philosopher_routine(head), (void *)head) && pthread_detach(head->thr))
-                return(false);
-        head = head->next;   
-    }
-    return(true);
-}
-
 bool ft_join_threads(t_table *table)
 {
     t_data *head;
@@ -43,7 +27,6 @@ pthread_mutex_t *ft_init_mutex(t_table **table)
     {
         if (pthread_mutex_init(&(fork[i]), NULL))
             return (NULL);
-        printf("i : %d\n", i);
     }
     return(fork);
 }

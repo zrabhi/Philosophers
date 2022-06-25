@@ -13,6 +13,9 @@ bool  ft_init(int ac , char **av, t_table *table)
     table->time_to_eat = ft_atoi(av[3]);
     table->time_to_sleep = ft_atoi(av[4]);
     if(ac == 6)
+    {
         table->number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
+        table->t_eat = 0;
+    }
     return(true);
 }

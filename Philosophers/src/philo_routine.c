@@ -12,18 +12,20 @@ bool    ft_death(t_data *philo, t_table *table)
  {
     int i;
 
-    while(1)
+    while (1)
     {
         i = -1;
-        while(++i < table->number_of_philosophers)
+        while (++i < table->number_of_philosophers)
         {
-            if( ft_get_time() - philo->last_meal > table->time_to_die)
+            if ( ft_get_time() - philo->last_meal > table->time_to_die)
             {
                 pthread_mutex_lock(&(table->data));
                 printf("%lld philosopher %d died\n", ft_get_time() - philo->philo_age, philo->id);
                 return(false);
             }
             philo = philo->next;
+            if (!ft_num_of_time_to_eat(table))
+                    return(false);
         }
     }
     return(true);
@@ -47,7 +49,7 @@ void    *ft_philosopher_routine(void *param)
         philo->last_meal = ft_get_time();
         ft_usleep(philo->table->time_to_eat);
         ft_eating(philo);
-        philo->t_eat++;
+        philo->table->t_eat++;
         pthread_mutex_unlock(&(philo->table->fork[i]));
         pthread_mutex_unlock(&(philo->table->fork[(i + 1) % philo->table->number_of_philosophers]));
         ft_usleep(philo->table->time_to_sleep);

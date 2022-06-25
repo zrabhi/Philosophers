@@ -25,6 +25,8 @@ int main(int ac, char **av)
         pthread_detach(head->thr);
         head = head->next;
     }
-    if(ft_death(table->head, table))
+    if(!ft_death(table->head, table))
+        return(0);
+    if(!ft_num_of_time_to_eat(table))
         return(0);
 }
