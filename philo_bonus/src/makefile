@@ -5,7 +5,7 @@ GREEN := \033[0;32m
 BLUE  := \033[0;34m
 #####################
 
-philo    = philo
+philo    = philo_bonus
 draw     =  draw
 SRC_DIR  = src
 PARSING_DIR = $(SRC_DIR)/parsing
@@ -15,7 +15,7 @@ OBJ		 = $(SRC:.c=.o)
 CC		 = cc
 GCCFLAGS = -Wall -Wextra -Werror -pthread
 HEADER   = $(SRC_DIR)/philosophers.h
-NAME     = philo
+NAME     = philo_bonus
 PH := "\n$(GREEN)  _____  _     _ _____         _____  _______  _____   _____  _     _ _______  ______ _______\n |_____] |_____|   |   |      |     | |______ |     | |_____] |_____| |______ |_____/ |______\n |       |     | __|__ |_____ |_____| ______| |_____| |       |     | |______ |    \_ ______|\n                                                                                             \n$                       \n$(WHITE)\n"
 
 all : $(NAME)
@@ -43,7 +43,3 @@ fclean : clean
 
 re: fclean all
 	@echo "     $(GREEN)Recompiling..........$(GREEN)"
-
-
-
-
