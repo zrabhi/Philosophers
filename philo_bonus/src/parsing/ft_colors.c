@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_colors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 13:55:17 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:55:18 by zakaria          ###   ########.fr       */
+/*   Created: 2022/06/25 13:55:13 by zakaria           #+#    #+#             */
+/*   Updated: 2022/06/25 13:55:14 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philosophers.h" 
+#include "../philosophers.h"
 
-bool	ft_isdigit(char *str)
+void    red()
 {
-	int i;
+    printf("\033[0;31m");
+}
 
-	i = -1;
-	while(str[++i])
-	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (false);
-	}
-	return (true);
+void    green()
+{
+    printf("\033[0;32m");
+}
+void    blue()
+{
+    printf("\033[0;34m");
 }

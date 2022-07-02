@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_create.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 13:55:17 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:55:18 by zakaria          ###   ########.fr       */
+/*   Created: 2022/06/25 13:29:56 by zakaria           #+#    #+#             */
+/*   Updated: 2022/06/25 13:29:57 by zakaria          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/philosophers.h" 
+#include "philosophers.h"
 
-bool	ft_isdigit(char *str)
+bool ft_join_threads(t_table *table)
 {
-	int i;
+    t_data *head;
+    int i;
 
-	i = -1;
-	while(str[++i])
-	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (false);
-	}
-	return (true);
+    i = -1;
+    head = table->head;
+    while(++i < table->number_of_philosophers)
+    {
+          if(pthread_join(head->thr, NULL))
+            return(false);
+        head = head->next; 
+    }
+    return(false);
 }
+

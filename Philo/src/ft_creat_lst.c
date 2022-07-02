@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "header/philosophers.h"
 
 t_data *ft_newnode(int id)
 {
@@ -63,4 +63,26 @@ void    ft_get_philo_data(t_table *table)
     i = -1;
     while(++i < table->number_of_philosophers)
            table = ft_creatphilo_data(&table, ft_newnode(i + 1));
+}
+
+void	ft_free_all(t_table **table)
+{
+	t_data	*tmp;
+
+	if (table && *table)
+	{
+		if ((*table)->head)
+		{
+			tmp = (*table)->head;
+			while (tmp)
+			{
+				(*table)->head = (*table)->head->next;
+				free(tmp);
+				tmp = (*table)->head;
+			}
+			(*table)->head = NULL;
+			free((*table)->head);
+		}
+		free(*table);
+	}
 }

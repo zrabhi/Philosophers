@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/philosophers.h"
+#include "philosophers.h"
 
 long long ft_get_time()
 {
@@ -31,7 +31,7 @@ bool    ft_death(t_data *philo, t_table *table)
         {
             if (ft_get_time() - philo->last_meal > table->time_to_die)
             {
-                pthread_mutex_lock(&(table->data));
+                sem_wait(table->printer);
                 printf("%lld philosopher %d died\n", ft_get_time() - philo->philo_age, philo->id);
                 return (false);
             }
@@ -53,16 +53,13 @@ void    *ft_philosopher_routine(void *param)
         usleep(600);
     while (true)
     {
-        pthread_mutex_lock(&(philo->table->fork[i]));
-        ft_has_taken_fork(philo);    
-        pthread_mutex_lock(&(philo->table->fork[(i + 1) % philo->table->number_of_philosophers]));
+        sem_wait(philo->table->fork);
         ft_has_taken_fork(philo);
-        philo->last_meal = ft_get_time();
+        sem_wait(philo->table->fork);
+        ft_has_taken_fork(philo);
         ft_usleep(philo->table->time_to_eat);
-        ft_eating(philo);
-        philo->t_eat++;
-        pthread_mutex_unlock(&(philo->table->fork[i]));
-        pthread_mutex_unlock(&(philo->table->fork[(i + 1) % philo->table->number_of_philosophers]));
+        sem_post(philo->table->fork);
+        sem_post(philo->table->fork);
         ft_usleep(philo->table->time_to_sleep);
         ft_is_sleeping(philo);
         ft_thinking(philo);

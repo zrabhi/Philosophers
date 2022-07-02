@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/philosophers.h"
+#include "philosophers.h"
 
 int ft_lstsize(t_data *data)
 {
@@ -32,7 +32,6 @@ bool ft_num_of_time_to_eat(t_table *table)
     i = 0;
     if(!table->number_of_times_each_philosopher_must_eat)
         return(false);
-                printf("test\n");
     if(i < table->number_of_philosophers)
     {
         if (table->head->t_eat < table->number_of_times_each_philosopher_must_eat)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "header/philosophers.h"
 
 bool ft_join_threads(t_table *table)
 {
