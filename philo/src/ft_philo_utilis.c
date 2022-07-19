@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/17 01:50:32 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/07/17 01:53:35 by zrabhi           ###   ########.fr       */
+/*   Created: 2022/07/16 22:26:39 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/16 22:28:09 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "philosophers.h"
+
+#include "header/philosophers.h"
 
 void	ft_usleep(long long time)
 {
@@ -22,34 +23,5 @@ void	ft_usleep(long long time)
 
 long	ft_new_time(t_table *table)
 {
-	return (ft_get_time() - table->philo_age);
-}
-
-void	kill_pids(int *pid, t_table *table)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < table->number_of_philosophers)
-		kill(pid[i], SIGINT);
-}
-
-void	wait_pid(int *pid, t_table *table)
-{
-	int	status;
-	int	i;
-
-	i = 0;
-	while (i < table->number_of_philosophers)
-	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-		{
-			if (WEXITSTATUS(status) == EXIT_FAILURE)
-			{
-				kill_pids(pid, table);
-				break ;
-			}
-		}
-	}
+	return (ft_get_time() - table->head->philo_age);
 }

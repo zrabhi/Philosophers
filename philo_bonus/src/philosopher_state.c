@@ -3,56 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_state.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 13:30:31 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 18:19:14 by zakaria          ###   ########.fr       */
+/*   Created: 2022/07/17 02:08:07 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/17 02:12:58 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "philosophers.h"
 
-void    ft_eating(t_data *head)
+void	ft_eating(t_table *table)
 {
-    long long time;
-    time = ft_get_time() - head->philo_age;
-    
-    red();
-    sem_wait(head->table->printer);
-    printf("%lld  %d is eating\n", time, head->id);
-    sem_post(head->table->printer);
-    
+	red();
+	sem_wait(table->printer);
+	printf("%lld  %d is eating\n", \
+		ft_get_time() - table->philo_age, table->id);
+	sem_post(table->printer);
 }
 
-void    ft_thinking(t_data *head)
+void	ft_thinking(t_table *table)
 {
-    long long time;
-    
-    red();
-    sem_wait(head->table->printer);
-    time  = ft_get_time() - head->philo_age;
-    printf("%lld  %d is thinking\n", time, head->id);
-    sem_post(head->table->printer);
+	red();
+	sem_wait(table->printer);
+	printf("%lld  %d is thinking\n", \
+		ft_get_time() - table->philo_age, table->id);
+	sem_post(table->printer);
 }
 
-void    ft_is_sleeping(t_data *head)
+void	ft_is_sleeping(t_table *table)
 {
-    long long time;
-    
-    red();
-    sem_wait(head->table->printer);
-    time = ft_get_time() - head->philo_age;
-    printf("%lld  %d is sleeping\n", time, head->id);
-    sem_post(head->table->printer);
+	red();
+	sem_wait(table->printer);
+	printf("%lld  %d is sleeping\n", \
+		ft_get_time() - table->philo_age, table->id);
+	sem_post(table->printer);
 }
 
-void    ft_has_taken_fork(t_data *head)
+void	ft_has_taken_fork(t_table *table)
 {
-    long long time;
-
-    red();
-    sem_wait(head->table->printer);
-    time = ft_get_time() - head->philo_age;
-    printf("%lld  %d has taken fork\n", time, head->id);
-    sem_post(head->table->printer);
+	red();
+	sem_wait(table->printer);
+	printf("%lld  %d has taken fork\n", \
+		ft_get_time() - table->philo_age, table->id);
+	sem_post(table->printer);
 }

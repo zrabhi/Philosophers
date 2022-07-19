@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_colors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zakaria <zakaria@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 13:55:13 by zakaria           #+#    #+#             */
-/*   Updated: 2022/06/25 13:55:14 by zakaria          ###   ########.fr       */
+/*   Created: 2022/07/17 02:28:50 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/17 02:28:54 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../philosophers.h"
 
-void    red()
+void	red(void)
 {
-    printf("\033[0;31m");
+	printf("\033[0;31m");
 }
 
-void    green()
+void	green(void)
 {
-    printf("\033[0;32m");
+	printf("\033[0;32m");
 }
-void    blue()
+
+void	blue(void)
 {
-    printf("\033[0;34m");
+	printf("\033[0;34m");
 }

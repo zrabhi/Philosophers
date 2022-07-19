@@ -6,11 +6,11 @@
 /*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 16:13:08 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/07/17 01:50:20 by zrabhi           ###   ########.fr       */
+/*   Updated: 2022/07/16 22:14:02 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "header/philosophers.h"
 
 int	ft_atoi(const char *str)
 {

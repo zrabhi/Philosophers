@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/17 01:59:21 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/07/17 02:36:02 by zrabhi           ###   ########.fr       */
+/*   Created: 2022/07/16 22:33:19 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/17 01:14:15 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "philosophers.h"
+
+#include "header/philosophers.h"
 
 long long	ft_get_time(void)
 {
@@ -19,25 +20,24 @@ long long	ft_get_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-bool	ft_death(t_table *table)
+bool	ft_death(t_data *philo, t_table *table)
 {
 	int	i;
 
-	while (true)
+	while (1)
 	{
 		i = -1;
 		while (++i < table->number_of_philosophers)
 		{
-			if (ft_get_time() - table->last_meal > table->time_to_die)
+			if (ft_get_time() - philo->last_meal > table->time_to_die)
 			{
-				sem_wait(table->printer);
+				pthread_mutex_lock(&(table->data));
 				printf("%lld  %d died\n", \
-					(ft_get_time() - table->philo_age), table->id);
+						ft_get_time() - philo->philo_age, philo->id);
 				return (false);
 			}
-			if (table->t_eat == \
-					table->number_of_times_each_philosopher_must_eat * \
-						table->number_of_philosophers)
+			if (philo->t_eat == \
+				philo->table->number_of_times_each_philosopher_must_eat)
 				return (false);
 		}
 		usleep(50);
@@ -47,26 +47,28 @@ bool	ft_death(t_table *table)
 
 void	*ft_philosopher_routine(void *param)
 {
-	t_table	*table;
+	t_data	*philo;
+	int		right;
 
-	table = (t_table *) param;
-	if ((table->id - 1) % 2 == 0)
+	philo = (t_data *) param;
+	if ((philo->id - 1) % 2 == 0)
 		usleep(600);
-	while (true)
+	right = ((philo->id + 1) % philo->table->number_of_philosophers);
+	while (1)
 	{
-		sem_wait(table->fork);
-		ft_has_taken_fork(table);
-		sem_wait(table->fork);
-		ft_has_taken_fork(table);
-		table->last_meal = ft_get_time();
-		ft_eating(table);
-		ft_usleep(table->time_to_eat);
-		table->t_eat++;
-		sem_post(table->fork);
-		sem_post(table->fork);
-		ft_is_sleeping(table);
-		ft_usleep(table->time_to_sleep);
-		ft_thinking(table);
+		pthread_mutex_lock(&(philo->table->fork[philo->id - 1]));
+		ft_has_taken_fork(philo);
+		pthread_mutex_lock(&(philo->table->fork[right]));
+		ft_has_taken_fork(philo);
+		philo->last_meal = ft_get_time();
+		ft_eating(philo);
+		ft_usleep(philo->table->time_to_eat);
+		philo->t_eat++;
+		pthread_mutex_unlock(&(philo->table->fork[philo->id - 1]));
+		pthread_mutex_unlock(&(philo->table->fork[right]));
+		ft_usleep(philo->table->time_to_sleep);
+		ft_is_sleeping(philo);
+		ft_thinking(philo);
 	}
 	return (false);
 }

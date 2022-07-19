@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/17 02:28:31 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/07/17 02:28:40 by zrabhi           ###   ########.fr       */
+/*   Created: 2022/07/16 22:46:25 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/16 22:49:18 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philosophers.h" 
+#include "../header/philosophers.h" 
 
 bool	ft_check(char **av, int ac)
 {

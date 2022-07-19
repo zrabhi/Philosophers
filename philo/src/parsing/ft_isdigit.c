@@ -5,11 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zrabhi <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/17 02:29:09 by zrabhi            #+#    #+#             */
-/*   Updated: 2022/07/17 02:29:32 by zrabhi           ###   ########.fr       */
+/*   Created: 2022/07/16 22:50:56 by zrabhi            #+#    #+#             */
+/*   Updated: 2022/07/16 22:52:08 by zrabhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../philosophers.h"
+#include "../header/philosophers.h" 
 
 bool	ft_isdigit(char *str)
 {
